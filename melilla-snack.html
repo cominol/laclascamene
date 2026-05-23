@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melilla Snack</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #9b1c3c;
+    --gold: #e8a020;
+    --cream: #f5efe0;
+    --warm-tan: #e8d9b8;
+    --wood: #c9b48a;
+    --dark: #2a1a0e;
+    --white: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--cream);
+    background-image:
+      repeating-linear-gradient(90deg, rgba(201,180,138,0.18) 0px, rgba(201,180,138,0.18) 2px, transparent 2px, transparent 60px),
+      repeating-linear-gradient(0deg, rgba(201,180,138,0.18) 0px, rgba(201,180,138,0.18) 2px, transparent 2px, transparent 60px);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--white);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e8d9b8' fill-opacity='0.5'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    border-bottom: 4px solid var(--gold);
+    padding: 18px 24px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 18px rgba(155,28,60,0.12);
+  }
+
+  .logo-img {
+    height: 72px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(155,28,60,0.2));
+  }
+
+  nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: var(--crimson);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    transition: all .2s;
+  }
+
+  nav a:hover {
+    background: var(--crimson);
+    color: var(--white);
+    border-color: var(--crimson);
+  }
+
+  /* ─── HERO BANNER ─── */
+  .hero {
+    background: var(--crimson);
+    background-image: linear-gradient(135deg, #7a1230 0%, #c42050 60%, #e8a020 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 40px 20px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    letter-spacing: 0.12em;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+    position: relative;
+  }
+
+  /* ─── ZIGZAG SEPARATOR ─── */
+  .zigzag {
+    height: 28px;
+    background: var(--cream);
+    background-image:
+      linear-gradient(135deg, var(--crimson) 25%, transparent 25%) -28px 0,
+      linear-gradient(225deg, var(--crimson) 25%, transparent 25%) -28px 0,
+      linear-gradient(315deg, var(--crimson) 25%, transparent 25%),
+      linear-gradient(45deg, var(--crimson) 25%, transparent 25%);
+    background-size: 56px 28px;
+  }
+
+  /* ─── MAIN GRID ─── */
+  .menu-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 20px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px;
+  }
+
+  /* ─── SECTION CARD ─── */
+  .section-card {
+    background: var(--white);
+    border-radius: 18px;
+    overflow: hidden;
+    border: 2.5px solid var(--warm-tan);
+    box-shadow: 0 4px 24px rgba(155,28,60,0.08), 0 1px 4px rgba(0,0,0,0.06);
+    transition: transform .25s, box-shadow .25s;
+    position: relative;
+  }
+
+  .section-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 36px rgba(155,28,60,0.15), 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .section-card.wide {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 740px) {
+    .section-card.wide { grid-column: span 1; }
+  }
+
+  .section-header {
+    background: var(--crimson);
+    color: var(--white);
+    padding: 14px 22px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .section-icon {
+    font-size: 1.6rem;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+  }
+
+  .section-header h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.55rem;
+    letter-spacing: 0.1em;
+  }
+
+  .section-body {
+    padding: 18px 20px 20px;
+    background: var(--cream);
+    background-image: repeating-linear-gradient(0deg, rgba(232,217,184,0.4) 0, rgba(232,217,184,0.4) 1px, transparent 1px, transparent 32px);
+  }
+
+  /* ─── ITEM ROWS ─── */
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px dashed var(--warm-tan);
+    gap: 10px;
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .item-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--dark);
+    line-height: 1.25;
+    flex: 1;
+  }
+
+  .item-name .sub {
+    display: block;
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .item-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow: 0 1px 4px rgba(232,160,32,0.35);
+  }
+
+  .item-badge.new {
+    background: var(--crimson);
+  }
+
+  /* ─── COMBO/MEAL GRID ─── */
+  .combo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 16px 20px 20px;
+    background: var(--cream);
+  }
+
+  .combo-item {
+    background: var(--white);
+    border: 2px solid var(--warm-tan);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    transition: border-color .2s, transform .2s;
+  }
+
+  .combo-item:hover {
+    border-color: var(--crimson);
+    transform: scale(1.03);
+  }
+
+  .combo-emoji {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .combo-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1rem;
+    color: var(--crimson);
+    letter-spacing: 0.06em;
+  }
+
+  .combo-desc {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 3px;
+    font-weight: 600;
+  }
+
+  /* ─── DESSERTS SECTION ─── */
+  .dessert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 16px 18px 20px;
+    background: var(--cream);
+  }
+
+  .dessert-item {
+    background: var(--white);
+    border: 2px solid var(--warm-tan);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    transition: border-color .2s, transform .2s;
+  }
+
+  .dessert-item:hover {
+    border-color: var(--gold);
+    transform: scale(1.04);
+  }
+
+  .dessert-emoji {
+    font-size: 1.7rem;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .dessert-name {
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: var(--dark);
+  }
+
+  /* ─── KIDS MENU ─── */
+  .kids-section {
+    background: linear-gradient(135deg, #fff8e8 0%, #fff0f4 100%);
+    border: 2.5px solid #ffccd8;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(155,28,60,0.07);
+    transition: transform .25s;
+  }
+
+  .kids-section:hover { transform: translateY(-4px); }
+
+  .kids-header {
+    background: linear-gradient(90deg, #d63060 0%, #e8a020 100%);
+    color: var(--white);
+    padding: 14px 22px;
+    border-bottom: 3px solid #ffccd8;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .kids-header h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.55rem;
+    letter-spacing: 0.1em;
+  }
+
+  .kids-body {
+    padding: 18px 20px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--crimson);
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-top: 4px solid var(--gold);
+  }
+
+  footer strong {
+    color: var(--gold);
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── DECORATIVE STRIP ─── */
+  .gold-strip {
+    height: 6px;
+    background: linear-gradient(90deg, var(--crimson), var(--gold), var(--crimson));
+  }
+
+  /* ─── COCA-COLA NOTE ─── */
+  .coca-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #e31e25;
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-card, .kids-section {
+    animation: fadeUp .45s ease both;
+  }
+
+  .section-card:nth-child(1) { animation-delay: .05s; }
+  .section-card:nth-child(2) { animation-delay: .10s; }
+  .section-card:nth-child(3) { animation-delay: .15s; }
+  .section-card:nth-child(4) { animation-delay: .20s; }
+  .section-card:nth-child(5) { animation-delay: .25s; }
+  .section-card:nth-child(6) { animation-delay: .30s; }
+  .kids-section                { animation-delay: .35s; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <img class="logo-img"
+    src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAE2AiwDASIAAhEBAxEB/8QAHQABAAEEAwEAAAAAAAAAAAAAAAcBBQYIAgQJA//EAFsQAAEDAwEDCAUDChAPAAMBAAEAAgMEBREGByExCBITQVFhcYEUkaGx0SKTwRUXMlJUcoOSstIWIyQzNkJTYmRzdIKElMLhGCUmNDVDREVGVVZjoqOzCTfi8P/EABsBAQACAwEBAAAAAAAAAAAAAAABAgMEBQYH/8QALREAAgIBAwQCAQMEAwEAAAAAAAECEQMEEiEFMUFRExRhIjJxFSM0gTNCUiT/2gAMAwEAAhEDEQA/ANMkREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBEVwstkvF6qBT2i11lfKf2lPC559gQFvRTbovkzbR79zJblT01ipnY+VVvzJj7xuT68KY9K8krSVGGSagvdwucgOSyECGM93WfaosGmABJwAST1BX+w6J1ffS36kaautYHcHR0zi314wvQzSmyrZ9phrfqRpa3xyN4Syx9LJn752Ss0jjjiYGxsaxo4BrcBRuIs0H09yZtql1aHz22jtjTw9LqQD6m5Ky6g5IOq5Gg1uqLTTnsZG9/wW5uUylsizTyXke30MPR6ytpd2GmePpVluHJL2gQ5NJdbJVAcP0x7CfW1bu5RExuPO6+8n7axaWufJpaWqY39tSSslyO3AOfYsCvOm9Q2Z/Mu1kuNC7/v0z2e8L1PyvjVU1NVRmOpp4p2HcWyMDgfIq1jceUKL0b1jsO2Z6oa81emqalnfk9PRZhfk9fydx8woN19yRayIPqNF35lQ3j6LXjmu8ngYPmAhNmqyLKNb7P9YaLqTDqOw1dEM4EpbzoneDxuKxdCQiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAKrQXEBoJJ6gph5P+w+6bR5vqrcXyW/T0TsOnA+XORxbHn2uW4uitlug9I07I7Pp2ibI0f5xNGJZSe0udkqGw+Dzso9O6grGh9JY7lO08DHSvcD6gvtV6T1RSQOnqtOXaGJu9z30cgaPE4XqBHGxgxGxrB2AYVXsZIwsewOaRggjIKWRaPNjYzoSs2ha9otPwc5lOXdJWSj/VQg/KPj1DvK9HNO2i3WCyUlntVM2no6SMRxRtHAAe9dezab0/ZqyprLRZaCgqKrfPJBA1hf178K7ZUMhuyuVQlcS4L4VVTFTxOlmkbGwDJLjg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"
+    alt="Melilla Snack Logo"
+  >
+  <nav>
+    <a href="#snacks">Snacks</a>
+    <a href="#combinados">Platos</a>
+    <a href="#bocadillos">Bocadillos</a>
+    <a href="#hamburguesas">Hamburguesas</a>
+    <a href="#tacos">Tacos</a>
+    <a href="#postres">Postres</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>🍔 Bienvenido a Melilla Snack 🥙</h1>
+  <p>Fast food con sabor · Freshness &amp; calidad en cada bocado</p>
+</div>
+<div class="zigzag"></div>
+
+<!-- MENU GRID -->
+<main class="menu-wrapper">
+
+  <!-- SNACKS -->
+  <section class="section-card" id="snacks">
+    <div class="section-header">
+      <span class="section-icon">🍟</span>
+      <h2>Snacks</h2>
+    </div>
+    <div class="section-body">
+      <div class="item">
+        <div class="item-name">Nuggets</div>
+        <span class="item-badge">⭐ Popular</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Ensalada</div>
+      </div>
+      <div class="item">
+        <div class="item-name">Alitas de Pollo</div>
+        <span class="item-badge">🔥 Hot</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Chicken Tenders</div>
+        <span class="item-badge">⭐ Popular</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Stick Mozzarella</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATOS COMBINADOS -->
+  <section class="section-card wide" id="combinados">
+    <div class="section-header">
+      <span class="section-icon">🍽️</span>
+      <h2>Platos Combinados</h2>
+    </div>
+    <div class="combo-grid">
+      <div class="combo-item">
+        <span class="combo-emoji">🍗</span>
+        <div class="combo-title">Combinada</div>
+        <div class="combo-desc">Pollo / Ternera / Mixta / Salchicha</div>
+      </div>
+      <div class="combo-item">
+        <span class="combo-emoji">🧆</span>
+        <div class="combo-title">Falafel</div>
+        <div class="combo-desc">Especialidad del local</div>
+      </div>
+      <div class="combo-item">
+        <span class="combo-emoji">🍟</span>
+        <div class="combo-title">Top Fries</div>
+        <div class="combo-desc">Patatas con toppings</div>
+      </div>
+      <div class="combo-item">
+        <span class="combo-emoji">🥘</span>
+        <div class="combo-title">Kapsalon</div>
+        <div class="combo-desc">Plato holandés con kebab y patatas</div>
+      </div>
+    </div>
+    <div style="padding: 0 20px 14px; background: var(--cream); text-align: center;">
+      <span class="coca-note">🥤 Todos los combinados incluyen Coca-Cola</span>
+    </div>
+  </section>
+
+  <!-- BOCADILLOS -->
+  <section class="section-card wide" id="bocadillos">
+    <div class="section-header">
+      <span class="section-icon">🥖</span>
+      <h2>Bocadillos</h2>
+    </div>
+    <div class="section-body">
+      <div class="item">
+        <div class="item-name">Baguette
+          <span class="sub">Pollo / Ternera / Tenders / Mixto</span>
+        </div>
+        <span class="coca-note">+ 🥤</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Pita
+          <span class="sub">Pollo / Ternera / Tenders / Mixto</span>
+        </div>
+        <span class="coca-note">+ 🥤</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Panini
+          <span class="sub">Pollo / Ternera / Tenders / Mixto</span>
+        </div>
+        <span class="coca-note">+ 🥤</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Torta
+          <span class="sub">Pollo / Ternera / Tenders / Mixto</span>
+        </div>
+        <span class="coca-note">+ 🥤</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAMBURGUESAS -->
+  <section class="section-card wide" id="hamburguesas">
+    <div class="section-header">
+      <span class="section-icon">🍔</span>
+      <h2>Hamburguesas</h2>
+    </div>
+    <div class="section-body">
+      <div class="item">
+        <div class="item-name">Cheese Burger</div>
+        <span class="coca-note">+ 🥤 + 🍟</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Bacon American Chicken</div>
+        <span class="coca-note">+ 🥤 + 🍟</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Doble Cheese Burger
+          <span class="sub">Doble ración de carne</span>
+        </div>
+        <span class="item-badge new">⭐ TOP</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Huevo Frito
+          <span class="sub">Añade a cualquier hamburguesa</span>
+        </div>
+        <span class="item-badge">Extra 🍳</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TACOS -->
+  <section class="section-card" id="tacos">
+    <div class="section-header">
+      <span class="section-icon">🌯</span>
+      <h2>Tacos</h2>
+    </div>
+    <div class="section-body">
+      <div class="item">
+        <div class="item-name">Taco L
+          <span class="sub">Pollo / Ternera / Salchicha</span>
+        </div>
+        <span class="coca-note">+ 🥤 + 🍟</span>
+      </div>
+      <div class="item">
+        <div class="item-name">Taco XL
+          <span class="sub">Pollo / Ternera / Salchicha</span>
+        </div>
+        <span class="item-badge new">XL 💪</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTRES -->
+  <section class="section-card" id="postres">
+    <div class="section-header">
+      <span class="section-icon">🍰</span>
+      <h2>Postres</h2>
+    </div>
+    <div class="dessert-grid">
+      <div class="dessert-item">
+        <span class="dessert-emoji">🍫</span>
+        <div class="dessert-name">Tiramisú Oreo</div>
+      </div>
+      <div class="dessert-item">
+        <span class="dessert-emoji">🧁</span>
+        <div class="dessert-name">ZA3 ZA3</div>
+      </div>
+      <div class="dessert-item">
+        <span class="dessert-emoji">☕</span>
+        <div class="dessert-name">Tiramisú</div>
+      </div>
+      <div class="dessert-item">
+        <span class="dessert-emoji">🍊</span>
+        <div class="dessert-name">Naranja</div>
+      </div>
+      <div class="dessert-item">
+        <span class="dessert-emoji">🥑</span>
+        <div class="dessert-name">Aguacate</div>
+      </div>
+      <div class="dessert-item">
+        <span class="dessert-emoji">🍹</span>
+        <div class="dessert-name">Multifrutas</div>
+      </div>
+    </div>
+    <div style="padding: 8px 18px 14px; background: var(--cream); text-align: center; font-size: .8rem; font-weight: 700; color: var(--crimson);">
+      🍋 Zumos Naturales frescos del día
+    </div>
+  </section>
+
+  <!-- MENÚ INFANTIL -->
+  <section class="kids-section" id="kids">
+    <div class="kids-header">
+      <span class="section-icon">👶</span>
+      <h2>Menú Infantil</h2>
+    </div>
+    <div class="kids-body">
+      <div class="item">
+        <div class="item-name">
+          Menú Infantil completo
+          <span class="sub">Hamburguesa + bebida + sorpresa 🎉</span>
+        </div>
+        <span class="item-badge new">Kids ❤️</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<div class="gold-strip"></div>
+<footer>
+  <strong>MELILLA SNACK</strong><br>
+  <span style="opacity:.8">Fast food · Sabor auténtico · Bienvenido siempre</span>
+</footer>
+
+</body>
+</html>

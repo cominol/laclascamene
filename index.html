@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant La Clasca · Lleida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ivory:#FDF5F7;
+  --dark:#1A0A0F;
+  --stone:#2A1520;
+  --gold:#D4587A;
+  --gold2:#E8829F;
+  --muted:#9A7080;
+  --light:#F5E0E6;
+}
+html,body{width:100%;min-height:100vh;}
+body{font-family:'Jost',sans-serif;background:var(--ivory);color:var(--dark);}
+.site{width:100%;max-width:1920px;margin:0 auto;}
+
+/* HERO */
+.hero{
+  background:var(--dark);
+  min-height:420px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:80px 120px 70px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(212,88,122,0.08) 0%,transparent 65%);
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.hero-ornament{color:var(--gold);font-size:12px;letter-spacing:8px;text-transform:uppercase;margin-bottom:28px;opacity:0.8;font-family:'Jost',sans-serif;font-weight:300;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:96px;font-weight:300;color:#FDF5F7;line-height:1;margin-bottom:8px;letter-spacing:4px;}
+.hero h1 em{color:var(--gold2);font-style:italic;}
+.hero-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:rgba(253,245,247,0.45);margin-bottom:40px;letter-spacing:1px;}
+.hero-divider{display:flex;align-items:center;gap:20px;margin-bottom:36px;}
+.hero-divider span{width:64px;height:1px;background:var(--gold);opacity:0.5;}
+.hero-divider i{color:var(--gold);font-size:18px;opacity:0.8;}
+.hero-meta{display:flex;gap:48px;flex-wrap:wrap;justify-content:center;}
+.hero-meta-item{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:rgba(253,245,247,0.5);font-weight:300;display:flex;align-items:center;gap:10px;}
+.hero-meta-item i{color:var(--gold2);font-size:16px;}
+
+/* NAV */
+.nav{background:#fff;display:flex;justify-content:center;gap:0;border-bottom:1px solid rgba(212,88,122,0.15);position:sticky;top:0;z-index:10;}
+.nav-btn{background:none;border:none;padding:18px 40px;font-family:'Jost',sans-serif;font-size:12px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:1px solid transparent;transition:all 0.25s;position:relative;}
+.nav-btn::after{content:'';position:absolute;bottom:-1px;left:50%;right:50%;height:1px;background:var(--gold);transition:all 0.25s;}
+.nav-btn:hover::after,.nav-btn.active::after{left:20%;right:20%;}
+.nav-btn:hover,.nav-btn.active{color:var(--gold);}
+
+/* SECTIONS */
+.section{padding:96px 120px;display:none;}
+.section.visible{display:block;}
+
+/* INICIO */
+.sobre-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:96px;align-items:start;max-width:1400px;margin:0 auto;}
+.sobre-label{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;font-weight:400;}
+.sobre-h2{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--dark);line-height:1.15;margin-bottom:32px;}
+.sobre-h2 em{color:var(--gold);font-style:italic;}
+.sobre-p{font-size:17px;color:var(--muted);line-height:2;font-weight:300;margin-bottom:20px;}
+.sobre-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(212,88,122,0.15);margin-top:48px;border:1px solid rgba(212,88,122,0.15);}
+.stat-box{background:var(--ivory);padding:36px 28px;text-align:center;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--gold);line-height:1;display:block;}
+.stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:10px;display:block;font-weight:300;}
+.sobre-info{display:flex;flex-direction:column;gap:16px;}
+.info-card{background:#fff;border:1px solid rgba(212,88,122,0.12);padding:28px 32px;}
+.info-card-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block;font-weight:400;}
+.info-card-val{font-size:15px;color:var(--stone);font-weight:400;line-height:1.7;}
+.info-card-val a{color:var(--gold);text-decoration:none;}
+.info-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.info-row:last-child{margin-bottom:0;}
+.info-row i{color:var(--gold);font-size:16px;width:18px;}
+
+/* CARTA */
+.carta-inner{max-width:1400px;margin:0 auto;}
+.carta-intro{text-align:center;margin-bottom:72px;}
+.carta-intro p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px;color:var(--muted);max-width:600px;margin:0 auto;}
+.categorias-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;}
+.categoria{margin-bottom:0;}
+.cat-header{display:flex;align-items:center;gap:24px;margin-bottom:32px;}
+.cat-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--dark);white-space:nowrap;}
+.cat-title em{color:var(--gold);font-style:italic;}
+.cat-rule{flex:1;height:1px;background:rgba(212,88,122,0.2);}
+.platos{display:flex;flex-direction:column;gap:1px;background:rgba(212,88,122,0.1);}
+.plato{background:var(--ivory);padding:20px 24px;display:flex;justify-content:space-between;align-items:baseline;transition:background 0.2s;}
+.plato:hover{background:#fff;}
+.plato-nombre{font-size:15px;color:var(--stone);font-weight:300;}
+.plato-desc{font-size:13px;color:var(--muted);margin-top:4px;font-style:italic;}
+.plato-left{flex:1;}
+.plato-precio{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold);font-weight:400;margin-left:20px;white-space:nowrap;}
+.carta-nota{text-align:center;margin-top:56px;font-size:13px;letter-spacing:1px;color:var(--muted);font-style:italic;}
+
+/* RESERVAS */
+.reservas-inner{max-width:800px;margin:0 auto;text-align:center;}
+.reservas-inner h2{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;margin-bottom:12px;}
+.reservas-inner h2 em{color:var(--gold);font-style:italic;}
+.reservas-inner > p{font-size:16px;color:var(--muted);margin-bottom:56px;font-weight:300;line-height:1.8;}
+.reserva-options{display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left;}
+.reserva-card{background:#fff;border:1px solid rgba(212,88,122,0.15);padding:28px 32px;display:flex;align-items:center;gap:24px;}
+.reserva-icon{width:52px;height:52px;background:var(--dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.reserva-icon i{color:var(--gold2);font-size:22px;}
+.reserva-text p:first-child{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:400;}
+.reserva-text p:last-child{font-size:15px;color:var(--stone);font-weight:300;}
+.reserva-text a{color:var(--gold);text-decoration:none;}
+
+/* FOOTER */
+.footer{background:var(--dark);padding:64px 120px;text-align:center;border-top:1px solid rgba(212,88,122,0.2);}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#FDF5F7;margin-bottom:10px;}
+.footer-logo em{color:var(--gold2);font-style:italic;}
+.footer-sub{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:rgba(253,245,247,0.3);margin-bottom:28px;font-weight:300;}
+.footer-links{display:flex;justify-content:center;gap:40px;margin-bottom:28px;}
+.footer-links a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(253,245,247,0.4);text-decoration:none;transition:color 0.2s;font-weight:300;}
+.footer-links a:hover{color:var(--gold2);}
+.footer-copy{font-size:12px;color:rgba(253,245,247,0.2);font-weight:300;}
+
+@media(max-width:1200px){
+  .section{padding:72px 64px;}
+  .sobre-grid{gap:64px;}
+  .categorias-grid{grid-template-columns:1fr;}
+  .hero{padding:70px 64px;}
+  .hero h1{font-size:72px;}
+}
+@media(max-width:768px){
+  .hero h1{font-size:48px;}
+  .section{padding:48px 24px;}
+  .sobre-grid{grid-template-columns:1fr;}
+  .reserva-options{grid-template-columns:1fr;}
+  .hero{padding:48px 24px;}
+  .footer{padding:48px 24px;}
+}
+</style>
+</head>
+<body>
+<div class="site">
+
+<div class="hero">
+  <p class="hero-ornament">Cuina Mediterrània · Lleida</p>
+  <h1>La <em>Clasca</em></h1>
+  <p class="hero-tagline">Tradición en cada arroz. Más de 30 años.</p>
+  <div class="hero-divider"><span></span><i class="ti ti-fish"></i><span></span></div>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><i class="ti ti-map-pin"></i> Carrer Jaume II, 17 · Lleida</div>
+    <div class="hero-meta-item"><i class="ti ti-clock"></i> L–S 13:30–17:00</div>
+    <div class="hero-meta-item"><i class="ti ti-phone"></i> 973 21 35 96</div>
+  </div>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="show('inicio')">El restaurante</button>
+  <button class="nav-btn" onclick="show('carta')">Carta</button>
+  <button class="nav-btn" onclick="show('reservas')">Reservas</button>
+</nav>
+
+<!-- INICIO -->
+<div class="section visible" id="sec-inicio">
+  <div class="sobre-grid">
+    <div>
+      <p class="sobre-label">Quiénes somos</p>
+      <h2 class="sobre-h2">Cocina mediterránea<br>con <em>alma propia</em></h2>
+      <p class="sobre-p">La Clasca es un restaurante especializado en cocina mediterránea, donde los arroces y los pescados son los protagonistas indiscutibles de una carta construida con producto de primera calidad.</p>
+      <p class="sobre-p">Llevamos más de 30 años en el corazón de Lleida, frente al río, ofreciendo una experiencia gastronómica que cuida cada detalle: desde la materia prima hasta el trato con cada persona que entra por nuestra puerta.</p>
+      <p class="sobre-p">El restaurante está dirigido por dos mujeres apasionadas por la cocina y por la hospitalidad, que hacen de cada visita algo memorable.</p>
+      <div class="sobre-stats">
+        <div class="stat-box"><span class="stat-num">+30</span><span class="stat-label">Años de historia</span></div>
+        <div class="stat-box"><span class="stat-num">4.8</span><span class="stat-label">Valoración media</span></div>
+        <div class="stat-box"><span class="stat-num">100%</span><span class="stat-label">Recomendado</span></div>
+        <div class="stat-box"><span class="stat-num">∞</span><span class="stat-label">Arroces servidos</span></div>
+      </div>
+    </div>
+    <div class="sobre-info">
+      <div class="info-card">
+        <span class="info-card-label">Dónde estamos</span>
+        <div class="info-row"><i class="ti ti-map-pin"></i><span class="info-card-val">Carrer Jaume II, 17 · 25001 Lleida</span></div>
+      </div>
+      <div class="info-card">
+        <span class="info-card-label">Horario</span>
+        <div class="info-row"><i class="ti ti-clock"></i>
+          <div class="info-card-val">Lunes a viernes: 13:30 – 17:00<br>Sábados: 13:30 – 17:00<br>Domingo: cerrado</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="info-card-label">Contacto</span>
+        <div class="info-row"><i class="ti ti-phone"></i><span class="info-card-val"><a href="tel:+34973213596">+34 973 21 35 96</a></span></div>
+        <div class="info-row"><i class="ti ti-mail"></i><span class="info-card-val"><a href="mailto:acastilloesteve@gmail.com">acastilloesteve@gmail.com</a></span></div>
+      </div>
+      <div class="info-card">
+        <span class="info-card-label">También para eventos</span>
+        <div class="info-row"><i class="ti ti-confetti"></i><span class="info-card-val">Bodas, comuniones, cumpleaños y celebraciones de empresa</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CARTA -->
+<div class="section" id="sec-carta">
+  <div class="carta-inner">
+    <div class="carta-intro">
+      <p class="sobre-label" style="text-align:center">Lo que ofrecemos</p>
+      <p>Producto de temporada, pescado fresco y arroces que llevan décadas perfeccionándose.</p>
+    </div>
+    <div class="categorias-grid">
+      <div class="categoria">
+        <div class="cat-header"><h3 class="cat-title"><em>Arroces</em></h3><div class="cat-rule"></div></div>
+        <div class="platos">
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Paella marinera</div><div class="plato-desc">Toques modernos, producto fresco</div></div><span class="plato-precio">—</span></div>
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Arroz negro</div><div class="plato-desc">Con alioli casero</div></div><span class="plato-precio">—</span></div>
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Arroz de verduras</div><div class="plato-desc">Temporada y producto local</div></div><span class="plato-precio">—</span></div>
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Arroz de sepia y gambas</div><div class="plato-desc">Especialidad de la casa</div></div><span class="plato-precio">—</span></div>
+        </div>
+      </div>
+      <div class="categoria">
+        <div class="cat-header"><h3 class="cat-title"><em>Entrantes</em></h3><div class="cat-rule"></div></div>
+        <div class="platos">
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Carpaccio de gamba roja</div><div class="plato-desc">Plato recomendado</div></div><span class="plato-precio">—</span></div>
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Anchoas</div><div class="plato-desc">Producto de primerísima calidad</div></div><span class="plato-precio">—</span></div>
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Calamares</div><div class="plato-desc">Frescos, a la plancha o fritos</div></div><span class="plato-precio">—</span></div>
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Selección de mariscos</div><div class="plato-desc">Según temporada</div></div><span class="plato-precio">—</span></div>
+        </div>
+      </div>
+      <div class="categoria">
+        <div class="cat-header"><h3 class="cat-title"><em>Postres</em></h3><div class="cat-rule"></div></div>
+        <div class="platos">
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Torrija de temporada</div><div class="plato-desc">Receta tradicional</div></div><span class="plato-precio">—</span></div>
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Postres de elaboración propia</div><div class="plato-desc">Cambian cada semana</div></div><span class="plato-precio">—</span></div>
+        </div>
+      </div>
+      <div class="categoria">
+        <div class="cat-header"><h3 class="cat-title"><em>Para beber</em></h3><div class="cat-rule"></div></div>
+        <div class="platos">
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Carta de vinos</div><div class="plato-desc">Selección de D.O. Costers del Segre y más</div></div><span class="plato-precio">—</span></div>
+          <div class="plato"><div class="plato-left"><div class="plato-nombre">Agua y refrescos</div><div class="plato-desc"></div></div><span class="plato-precio">—</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="carta-nota">La carta varía según el mercado y la temporada. Consulta disponibilidad al reservar.</p>
+  </div>
+</div>
+
+<!-- RESERVAS -->
+<div class="section" id="sec-reservas">
+  <div class="reservas-inner">
+    <h2>Haz tu <em>reserva</em></h2>
+    <p>Para garantizar tu mesa, te recomendamos reservar con antelación. Estamos disponibles para grupos, eventos privados y celebraciones especiales.</p>
+    <div class="reserva-options">
+      <div class="reserva-card"><div class="reserva-icon"><i class="ti ti-phone"></i></div><div class="reserva-text"><p>Teléfono</p><p><a href="tel:+34973213596">+34 973 21 35 96</a></p></div></div>
+      <div class="reserva-card"><div class="reserva-icon"><i class="ti ti-mail"></i></div><div class="reserva-text"><p>Email</p><p><a href="mailto:acastilloesteve@gmail.com">acastilloesteve@gmail.com</a></p></div></div>
+      <div class="reserva-card"><div class="reserva-icon"><i class="ti ti-map-pin"></i></div><div class="reserva-text"><p>Dirección</p><p>Carrer Jaume II, 17 · 25001 Lleida</p></div></div>
+      <div class="reserva-card"><div class="reserva-icon"><i class="ti ti-confetti"></i></div><div class="reserva-text"><p>Eventos privados</p><p>Bodas, comuniones y celebraciones. Llámanos para presupuesto.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-logo">La <em>Clasca</em></div>
+  <p class="footer-sub">Cuina Mediterrània · Lleida</p>
+  <div class="footer-links">
+    <a href="#" onclick="show('inicio')">El restaurante</a>
+    <a href="#" onclick="show('carta')">Carta</a>
+    <a href="#" onclick="show('reservas')">Reservas</a>
+  </div>
+  <p class="footer-copy">© 2026 Restaurant La Clasca · Carrer Jaume II, 17 · Lleida</p>
+</div>
+
+</div>
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('visible');
+  const map={inicio:0,carta:1,reservas:2};
+  document.querySelectorAll('.nav-btn')[map[id]].classList.add('active');
+}
+</script>
+</body>
+</html>

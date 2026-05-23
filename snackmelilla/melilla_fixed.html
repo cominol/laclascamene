@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snack MELILLA – 100% Halal | Tarragona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:    #C8102E;
+    --gold:   #D4A017;
+    --black:  #0D0D0D;
+    --cream:  #F5EDD8;
+    --white:  #FFFFFF;
+    --dark:   #1A1006;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Cairo', sans-serif; background: var(--black); color: var(--cream); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.8rem 2rem;
+    background: rgba(10,6,2,0.92); backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--gold);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem,4vw,2rem); color: var(--gold); letter-spacing: .12em; line-height: 1; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+  .nav-links a { color: var(--cream); text-decoration: none; font-weight: 600; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .halal-badge-nav { background: var(--red); color: #fff; font-size: .7rem; font-weight: 700; letter-spacing: .1em; padding: .3rem .7rem; border-radius: 3px; text-transform: uppercase; }
+  .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .burger span { display: block; width: 26px; height: 2px; background: var(--gold); transition: .3s; }
+
+  /* ── HERO ── */
+  .hero { position: relative; height: 100vh; min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+  .hero-slides { position: absolute; inset: 0; z-index: 0; }
+  .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease; }
+  .hero-slide.active { opacity: 1; }
+  .hero-slide:nth-child(1) { background-image: url('foto3.png'); }
+  .hero-slide:nth-child(2) { background-image: url('foto2.png'); }
+  .hero-slide:nth-child(3) { background-image: url('foto1.png'); }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,6,2,.45) 0%, rgba(10,6,2,.7) 55%, rgba(10,6,2,.97) 100%); z-index: 1; }
+  .hero-content { position: relative; z-index: 2; padding: 1rem; }
+  .hero-halal { display: inline-block; font-family: 'Amiri', serif; font-size: clamp(1rem,3vw,1.4rem); color: var(--gold); letter-spacing: .15em; margin-bottom: 1rem; border: 1px solid var(--gold); padding: .3rem 1.2rem; text-transform: uppercase; animation: fadeUp .8s ease both; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem,14vw,10rem); line-height: .9; letter-spacing: .04em; color: var(--white); text-shadow: 4px 4px 0 var(--red), 8px 8px 0 rgba(0,0,0,.5); animation: fadeUp .8s .15s ease both; }
+  .hero-title span { color: var(--gold); }
+  .hero-sub { font-size: clamp(.95rem,2.5vw,1.2rem); color: var(--cream); margin-top: 1rem; letter-spacing: .06em; opacity: .9; animation: fadeUp .8s .3s ease both; }
+  .hero-ctas { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp .8s .45s ease both; }
+  .btn { display: inline-block; padding: .75rem 2rem; font-family: 'Cairo', sans-serif; font-weight: 700; font-size: .9rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: .2s; }
+  .btn-primary { background: var(--red); color: #fff; border-color: var(--red); }
+  .btn-primary:hover { background: transparent; color: var(--red); }
+  .btn-outline { background: transparent; color: var(--gold); border-color: var(--gold); }
+  .btn-outline:hover { background: var(--gold); color: var(--black); }
+  .scroll-hint { position: absolute; bottom: 1.8rem; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .4rem; color: var(--gold); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; opacity: .7; animation: bounce 2s infinite; }
+  .scroll-hint::after { content: '↓'; font-size: 1.2rem; }
+
+  /* ── BAND ── */
+  .band { background: var(--red); padding: .7rem 0; overflow: hidden; white-space: nowrap; }
+  .band-inner { display: inline-block; animation: marquee 20s linear infinite; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: .25em; color: var(--white); }
+  .band-inner span { margin: 0 2rem; opacity: .5; }
+
+  /* ── SECTIONS ── */
+  section { padding: clamp(3rem,8vw,6rem) clamp(1rem,5vw,4rem); }
+  .section-tag { font-family: 'Bebas Neue', sans-serif; font-size: .85rem; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; margin-bottom: .5rem; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,7vw,5rem); line-height: 1; letter-spacing: .05em; }
+  .section-divider { width: 60px; height: 4px; background: var(--red); margin: 1rem 0 2rem; }
+
+  /* ── ABOUT ── */
+  #sobre { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .about-text p { font-size: 1.05rem; line-height: 1.8; color: rgba(245,237,216,.85); margin-bottom: 1rem; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+  .stat { border-left: 3px solid var(--gold); padding-left: 1rem; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: .8rem; color: rgba(245,237,216,.6); letter-spacing: .1em; text-transform: uppercase; }
+  .about-image { position: relative; border-radius: 2px; overflow: hidden; aspect-ratio: 4/5; }
+  .about-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-frame { position: absolute; inset: 0; border: 2px solid var(--gold); margin: 1rem; pointer-events: none; z-index: 1; opacity: .35; }
+
+  /* ── MENU ── */
+  #menu { background: var(--dark); }
+  #menu .inner { max-width: 1100px; margin: 0 auto; }
+  .menu-cats { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .cat-btn { background: transparent; border: 1.5px solid rgba(212,160,23,.3); color: var(--cream); font-family: 'Cairo', sans-serif; font-weight: 600; font-size: .85rem; letter-spacing: .05em; padding: .5rem 1.2rem; cursor: pointer; transition: .2s; text-transform: uppercase; }
+  .cat-btn.active, .cat-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--black); }
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .menu-card { background: rgba(255,255,255,.04); border: 1px solid rgba(212,160,23,.15); border-radius: 2px; overflow: hidden; transition: transform .2s, border-color .2s; display: none; }
+  .menu-card.visible { display: block; }
+  .menu-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .menu-card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: #1a0800; }
+  .menu-card-body { padding: 1rem 1.2rem 1.2rem; }
+  .menu-card-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: .06em; color: var(--white); margin-bottom: .4rem; }
+  .menu-card-desc { font-size: .85rem; color: rgba(245,237,216,.6); line-height: 1.5; margin-bottom: .8rem; }
+  .menu-card-footer { display: flex; justify-content: space-between; align-items: center; }
+  .menu-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--gold); letter-spacing: .05em; }
+  .menu-tag { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 2px; }
+  .tag-halal { background: #006400; color: #fff; }
+  .tag-nuevo { background: var(--red); color: #fff; }
+  .tag-popular { background: var(--gold); color: var(--black); }
+
+  /* ── GALLERY ── */
+  #galeria .inner { max-width: 1200px; margin: 0 auto; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  .gal-item { border-radius: 2px; overflow: hidden; }
+  .gal-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; aspect-ratio: 4/3; }
+  .gal-item:first-child { grid-column: span 2; }
+  .gal-item:first-child img { aspect-ratio: 16/9; }
+  .gal-item:hover img { transform: scale(1.05); }
+
+  /* ── REVIEWS ── */
+  #resenas { background: var(--dark); }
+  #resenas .inner { max-width: 1000px; margin: 0 auto; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .review-card { background: rgba(255,255,255,.04); border: 1px solid rgba(212,160,23,.15); padding: 1.5rem; border-radius: 2px; position: relative; }
+  .review-card::before { content: '\201C'; font-family: 'Amiri', serif; font-size: 5rem; color: var(--red); opacity: .2; position: absolute; top: -.5rem; left: 1rem; line-height: 1; }
+  .review-stars { color: var(--gold); font-size: 1rem; margin-bottom: .8rem; }
+  .review-text { font-size: .9rem; line-height: 1.7; color: rgba(245,237,216,.8); margin-bottom: 1rem; }
+  .review-author { font-weight: 700; font-size: .85rem; color: var(--gold); letter-spacing: .05em; }
+
+  /* ── CONTACTO ── */
+  #contacto { background: var(--red); text-align: center; padding: clamp(3rem,8vw,6rem) 2rem; }
+  #contacto .section-title { color: var(--white); }
+  #contacto .section-divider { background: rgba(255,255,255,.5); margin: 1rem auto 2rem; }
+  .info-cards { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; margin-bottom: 2.5rem; }
+  .info-card { background: rgba(0,0,0,.2); border: 1px solid rgba(255,255,255,.2); padding: 1.5rem 2rem; min-width: 180px; border-radius: 2px; }
+  .info-card-icon { font-size: 1.6rem; margin-bottom: .5rem; }
+  .info-card-label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; opacity: .7; margin-bottom: .3rem; }
+  .info-card-value { font-weight: 700; font-size: 1rem; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--black); border-top: 1px solid rgba(212,160,23,.2); padding: 2rem; text-align: center; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); letter-spacing: .15em; margin-bottom: .5rem; }
+  .footer-logo span { color: var(--red); }
+  .footer-text { font-size: .8rem; color: rgba(245,237,216,.4); letter-spacing: .08em; }
+  .footer-arabic { font-family: 'Amiri', serif; font-size: 1.2rem; color: var(--gold); opacity: .5; margin-top: .5rem; }
+
+  /* ── KEYFRAMES ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #sobre { grid-template-columns: 1fr; gap: 2rem; }
+    .about-image { aspect-ratio: 3/2; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; background: rgba(10,6,2,.97); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 2px solid var(--gold); }
+    .burger { display: flex; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gal-item:first-child { grid-column: span 2; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    .hero-ctas { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+ <img src="logo.png" style="height: 50px;" alt="Snack Melilla">
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#sobre">Nosotros</a></li>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <span class="halal-badge-nav">100% Halal</span>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+   <div class="hero-halal">Comida 100% Halal &middot; Tarragona</div>
+    <img src="logo.png" style="display:block; margin: 0 auto 20px auto; width: 280px;" alt="logo">
+    <h1 class="hero-title">Snack<br><span>Melilla</span></h1>
+    <p class="hero-sub">Tacos &middot; Kebabs &middot; Shawarmas &middot; Hamburguesas &middot; Alitas<br>Carrer Sant Benilde, 3 &middot; Torreforta, Tarragona</p>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn btn-primary">Ver el menú</a>
+      <a href="tel:+34877079351" class="btn btn-outline">Llamar ahora</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Descubre más</div>
+</section>
+
+<!-- BAND -->
+<div class="band">
+  <div class="band-inner">
+    100% HALAL <span>&bull;</span> TACOS FRANCESES <span>&bull;</span> KEBABS <span>&bull;</span> SHAWARMA <span>&bull;</span> HAMBURGUESAS <span>&bull;</span> ALITAS <span>&bull;</span> FRESCURA GARANTIZADA <span>&bull;</span> TARRAGONA <span>&bull;</span>
+    100% HALAL <span>&bull;</span> TACOS FRANCESES <span>&bull;</span> KEBABS <span>&bull;</span> SHAWARMA <span>&bull;</span> HAMBURGUESAS <span>&bull;</span> ALITAS <span>&bull;</span> FRESCURA GARANTIZADA <span>&bull;</span> TARRAGONA <span>&bull;</span>
+  </div>
+</div>
+
+<!-- SOBRE NOSOTROS -->
+<section>
+  <div id="sobre">
+    <div class="about-text">
+      <p class="section-tag">Quiénes somos</p>
+      <h2 class="section-title">Sabor<br>Auténtico</h2>
+      <div class="section-divider"></div>
+      <p>En Snack Melilla llevamos el sabor del Magreb al corazón de Tarragona. Todo lo que cocinamos es <strong>100% halal</strong>, fresco y preparado con ingredientes de calidad — sin trampa ni cartón.</p>
+      <p>Nuestros tacos franceses son los más famosos de la provincia. Viene gente desde Reus solo por ellos. Los kebabs, las hamburguesas, las alitas... todo está buenísimo y a un precio que no revienta el bolsillo.</p>
+      <p>Ambiente limpio, gente amable y comida que de verdad te llena. Así de simple.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-num">4.5★</div><div class="stat-label">Nota Google</div></div>
+        <div class="stat"><div class="stat-num">7/7</div><div class="stat-label">Días abierto</div></div>
+        <div class="stat"><div class="stat-num">€1–20</div><div class="stat-label">Rango de precios</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Halal certificado</div></div>
+      </div>
+    </div>
+    <div class="about-image">
+      <img src="foto2.png" alt="Comida de Snack Melilla — alitas, patatas y refresco">
+      <div class="about-frame"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENÚ -->
+<section id="menu">
+  <div class="inner">
+    <p class="section-tag">Lo que cocinamos</p>
+    <h2 class="section-title">Nuestro Menú</h2>
+    <div class="section-divider"></div>
+    <div class="menu-cats">
+      <button class="cat-btn active" data-cat="all">Todo</button>
+      <button class="cat-btn" data-cat="tacos">Tacos</button>
+      <button class="cat-btn" data-cat="kebab">Kebab &amp; Shawarma</button>
+      <button class="cat-btn" data-cat="burger">Hamburguesas</button>
+      <button class="cat-btn" data-cat="pollo">Pollo</button>
+      <button class="cat-btn" data-cat="bebidas">Bebidas</button>
+    </div>
+    <div class="menu-grid">
+
+      <div class="menu-card visible" data-cat="tacos">
+        <img class="menu-card-img" src="foto3.png" alt="Taco francés de pollo">
+        <div class="menu-card-body">
+          <div class="menu-card-name">Taco Francés de Pollo</div>
+          <div class="menu-card-desc">El rey de la casa. Pollo tierno, salsas frescas, lechuga, tomate. Raciones que de verdad llenan.</div>
+          <div class="menu-card-footer"><span class="menu-price">desde 4€</span><span class="menu-tag tag-popular">El más pedido</span></div>
+        </div>
+      </div>
+
+      <div class="menu-card visible" data-cat="tacos">
+        <img class="menu-card-img" src="foto3.png" alt="Taco francés de carne">
+        <div class="menu-card-body">
+          <div class="menu-card-name">Taco Francés de Carne</div>
+          <div class="menu-card-desc">Carne especiada al estilo magrebí, dentro de un pan crujiente con salsas de la casa.</div>
+          <div class="menu-card-footer"><span class="menu-price">desde 4€</span><span class="menu-tag tag-halal">Halal</span></div>
+        </div>
+      </div>
+
+      <div class="menu-card visible" data-cat="kebab">
+        <img class="menu-card-img" src="foto3.png" alt="Kebab">
+        <div class="menu-card-body">
+          <div class="menu-card-name">Kebab Clásico</div>
+          <div class="menu-card-desc">Pan de pita caliente, carne de ternera o pollo, verduras frescas y salsa yogur.</div>
+          <div class="menu-card-footer"><span class="menu-price">desde 5€</span><span class="menu-tag tag-popular">Popular</span></div>
+        </div>
+      </div>
+
+      <div class="menu-card visible" data-cat="kebab">
+        <img class="menu-card-img" src="foto3.png" alt="Durum mixto">
+        <div class="menu-card-body">
+          <div class="menu-card-name">Durum Mixto</div>
+          <div class="menu-card-desc">Mezcla de pollo y carne en pan fino enrollado, con ensalada y salsas especiales.</div>
+          <div class="menu-card-footer"><span class="menu-price">desde 6€</span><span class="menu-tag tag-halal">Halal</span></div>
+        </div>
+      </div>
+
+      <div class="menu-card visible" data-cat="burger">
+        <img class="menu-card-img" src="foto1.png" alt="Hamburguesa americana">
+        <div class="menu-card-body">
+          <div class="menu-card-name">Hamburguesa Americana</div>
+          <div class="menu-card-desc">Carne jugosa halal, queso cheddar, lechuga, tomate, cebolla y salsa secreta.</div>
+          <div class="menu-card-footer"><span class="menu-price">desde 6€</span><span class="menu-tag tag-popular">Popular</span></div>
+        </div>
+      </div>
+
+      <div class="menu-card visible" data-cat="pollo">
+        <img class="menu-card-img" src="foto1.png" alt="Alitas de pollo con patatas">
+        <div class="menu-card-body">
+          <div class="menu-card-name">Alitas de Pollo</div>
+          <div class="menu-card-desc">Alitas generosas, crujientes por fuera, jugosas por dentro. Con patatas y salsa a elegir.</div>
+          <div class="menu-card-footer"><span class="menu-price">desde 6€</span><span class="menu-tag tag-popular">Los favoritos</span></div>
+        </div>
+      </div>
+
+      <div class="menu-card visible" data-cat="pollo">
+        <img class="menu-card-img" src="foto2.png" alt="Combo pollo con patatas">
+        <div class="menu-card-body">
+          <div class="menu-card-name">Combo Pollo + Patatas</div>
+          <div class="menu-card-desc">Trozos de pollo especiado con patatas fritas y lechuga. Ración contundente.</div>
+          <div class="menu-card-footer"><span class="menu-price">desde 7€</span><span class="menu-tag tag-halal">Halal</span></div>
+        </div>
+      </div>
+
+      <div class="menu-card visible" data-cat="bebidas">
+        <img class="menu-card-img" src="foto2.png" alt="Coca-Cola y bebidas">
+        <div class="menu-card-body">
+          <div class="menu-card-name">Refrescos</div>
+          <div class="menu-card-desc">Coca-Cola, Fanta, agua y más. Para acompañar cualquier plato.</div>
+          <div class="menu-card-footer"><span class="menu-price">desde 1.50€</span><span class="menu-tag tag-halal">Sin alcohol</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section>
+  <div id="galeria" class="inner">
+    <p class="section-tag">El local</p>
+    <h2 class="section-title">Galería</h2>
+    <div class="section-divider"></div>
+    <div class="gallery-grid">
+      <div class="gal-item"><img src="foto3.png" alt="Kebab con patatas y salsas"></div>
+      <div class="gal-item"><img src="foto1.png" alt="Alitas y patatas fritas"></div>
+      <div class="gal-item"><img src="foto2.png" alt="Combo alitas, patatas y refresco"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEÑAS -->
+<section id="resenas">
+  <div class="inner">
+    <p class="section-tag">Lo que dicen</p>
+    <h2 class="section-title">Reseñas</h2>
+    <div class="section-divider"></div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Los tacos buenísimos y llenan un montón. Los mejores de la provincia de Tarragona. Vivo en Reus y cuando quiero taco francés cojo el coche y voy hasta Torreforta.</p>
+        <span class="review-author">— Claudia D.</span>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Este snack-bar es realmente excepcional. La calidad está muy bien, al igual que el precio. El comedor muy limpio. No lo duden.</p>
+        <span class="review-author">— Youcef O.</span>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Comida deliciosa y 100% fresca y halal. Me sorprendió mucho la cena. Comimos muy bien, el servicio muy amable y atento, los platos buenísimos.</p>
+        <span class="review-author">— Muhammad K.</span>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Tienen el mejor capuchino de toda la región y el camarero (Kim) más amable en kilómetros a la redonda. Vivimos en Altafulla y a menudo venimos caminando.</p>
+        <span class="review-author">— Cliente habitual</span>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Uno de los mejores tacos de la zona. Merece mucho por su relación calidad-precio. Servicio y ambiente de 5.</p>
+        <span class="review-author">— Reseña Google</span>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Recomiendo el de pollo. Está muy muy rico y es barato. La ración es buena. Volveré seguro.</p>
+        <span class="review-author">— Reseña Google</span>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;color:rgba(245,237,216,.4);font-size:.8rem;letter-spacing:.08em">Más de 4.5 de nota en Google Maps &middot; Tarragona</p>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <p class="section-tag" style="color:rgba(255,255,255,.6)">Encuéntranos</p>
+  <h2 class="section-title">Ven a vernos</h2>
+  <div class="section-divider"></div>
+  <div class="info-cards">
+    <div class="info-card">
+      <div class="info-card-icon">&#128205;</div>
+      <div class="info-card-label">Dirección</div>
+      <div class="info-card-value">Carrer Sant Benilde, 3<br>Torreforta, Tarragona</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">&#128222;</div>
+      <div class="info-card-label">Teléfono</div>
+      <div class="info-card-value">+34 877 07 93 51</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">&#128336;</div>
+      <div class="info-card-label">Horario</div>
+      <div class="info-card-value">7 días a la semana<br>Consulta por teléfono</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-icon">&#128663;</div>
+      <div class="info-card-label">Para llevar</div>
+      <div class="info-card-value">Sí, disponible</div>
+    </div>
+  </div>
+  <a href="https://www.google.com/maps/place/Snack+MELILLA+-+100%25+Halal/@41.1204382,1.2121681,17z" target="_blank" class="btn btn-outline" style="border-color:#fff;color:#fff">Cómo llegar en Google Maps</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Snack <span>MELILLA</span></div>
+  <p class="footer-text">Carrer Sant Benilde, 3 &middot; Tarragona &middot; +34 877 07 93 51</p>
+  <p class="footer-arabic">بسم الله الرحمن الرحيم</p>
+  <p class="footer-text" style="margin-top:1.5rem">&copy; 2025 Snack Melilla &middot; 100% Halal &middot; Tarragona</p>
+</footer>
+
+<script>
+  // Burger menu
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Hero slideshow
+  const slides = document.querySelectorAll('.hero-slide');
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 4500);
+
+  // Menu filter
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.menu-card').forEach(card => {
+        card.classList.toggle('visible', cat === 'all' || card.dataset.cat === cat);
+      });
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'fadeUp 0.6s ease both';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.menu-card, .review-card, .gal-item, .stat').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
